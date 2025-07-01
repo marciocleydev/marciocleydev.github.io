@@ -156,37 +156,46 @@
     margin-bottom: 2rem;
 }
 
-/* Container principal */
 .language-container {
     max-width: 500px;
     margin: 0 auto;
-    padding: 0.8rem 0; 
 }
 
-/* Itens de idioma */
 .language-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.language-item:last-child {
+    border-bottom: none;
+}
+
+.language-info {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 0.6rem 0; 
-    font-size: 0.95rem; 
 }
 
-/* Bandeiras */
 .flag-icon {
-    font-size: 1.3rem; 
-    min-width: 24px; 
+    font-size: 1.5rem;
 }
 
-/* Níveis (pontos) */
+.language-name {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
 .language-level {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
 }
 
 .level-dot {
-    width: 12px; 
+    width: 12px;
     height: 12px;
     border-radius: 50%;
     background: #e0e0e0;
@@ -196,23 +205,11 @@
     background: #3498db;
 }
 
-/* Texto de nível */
 .level-text {
-    margin-left: 8px;
-    font-size: 0.9rem; 
-    color: #555; /
-    font-weight: 600; 
-}
-
-/* Siglas de países */
-.country-code {
-    font-weight: bold;
-    color: #2c3e50;
-    margin-right: 5px;
-}
-.language-item:hover {
-    background: #f8f9fa;
-    border-radius: 4px;
+    margin-left: 10px;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    font-weight: 500;
 }
 
 /* Ícone no título */
@@ -641,7 +638,7 @@
         <div class="contact-info">
             <p>Email: <a href="mailto:marciocleydev@gmail.com">marciocleydev@gmail.com</a></p>
         </div>
-        <p>© 2025 Marcio Cley Soares Araujo. Todos os direitos reservados.</p>
+        <p>© 2024 Marcio Cley Soares Araujo. Todos os direitos reservados.</p>
     </footer>
 </body>
 </html>
