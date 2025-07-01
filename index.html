@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Marcio Cley - Desenvolvedor Java Full Stack</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #2c3e50;
@@ -263,30 +265,71 @@
             margin-bottom: 3rem;
         }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
+       .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
 
-        .social-link {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            line-height: 50px;
-            font-size: 1.5rem;
-            transition: all 0.3s;
-        }
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    font-size: 0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
 
-        .social-link:hover {
-            background: var(--secondary);
-            transform: scale(1.1);
-        }
+.social-link:hover {
+    background: var(--secondary);
+    transform: scale(1.1);
+}
+
+.social-link::before {
+    font-family: "Font Awesome 6 Brands";
+    font-size: 1.5rem;
+    content: '';
+}
+
+.social-link[href*="github"]::before {
+    content: '\f09b';
+}
+
+.social-link[href*="linkedin"]::before {
+    content: '\f08c';
+}
+
+.social-link[href*="mailto"]::before {
+    font-family: "Font Awesome 6 Free";
+    content: '\f0e0';
+}
+
+.social-link::after {
+    content: attr(aria-label);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.social-link:hover::after {
+    opacity: 1;
+}
 
         footer {
             background: var(--dark);
@@ -461,10 +504,10 @@
             <p>Estou aberto a oportunidades na área de desenvolvimento. Entre em contato para conversarmos!</p>
             
             <div class="social-links">
-                <a href="https://github.com/marciocleydev" class="social-link" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/marciocleydev" class="social-link" target="_blank">LinkedIn</a>
-                <a href="mailto:marcio.cley@example.com" class="social-link">Email</a>
-            </div>
+    <a href="https://github.com/marciocleydev" class="social-link" aria-label="GitHub" target="_blank"></a>
+    <a href="https://www.linkedin.com/in/marciocleydev" class="social-link" aria-label="LinkedIn" target="_blank"></a>
+    <a href="mailto:seu-email@exemplo.com" class="social-link" aria-label="Email"></a>
+</div>
         </aside>
     </main>
 
