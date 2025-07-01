@@ -156,33 +156,38 @@
     margin-bottom: 2rem;
 }
 
+/* Container principal */
 .language-container {
     max-width: 500px;
     margin: 0 auto;
-    padding: 0.5rem 0; 
+    padding: 0.8rem 0; 
 }
 
+/* Itens de idioma */
 .language-item {
     display: flex;
-    align-items: center; 
-    gap: 8px;
-    padding: 0.4rem 0;
+    align-items: center;
+    gap: 10px;
+    padding: 0.6rem 0; 
+    font-size: 0.95rem; 
 }
 
-
+/* Bandeiras */
 .flag-icon {
-    font-size: 1.2rem;
+    font-size: 1.3rem; 
+    min-width: 24px; 
 }
 
+/* Níveis (pontos) */
 .language-level {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
 }
 
 .level-dot {
-    width: 10px; 
-    height: 10px;
+    width: 12px; 
+    height: 12px;
     border-radius: 50%;
     background: #e0e0e0;
 }
@@ -191,11 +196,19 @@
     background: #3498db;
 }
 
+/* Texto de nível */
 .level-text {
-    margin-left: 8px; 
-    font-size: 0.85rem; 
-    color: #7f8c8d;
-    font-weight: 500;
+    margin-left: 8px;
+    font-size: 0.9rem; 
+    color: #555; /
+    font-weight: 600; 
+}
+
+/* Siglas de países */
+.country-code {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-right: 5px;
 }
 .language-item:hover {
     background: #f8f9fa;
