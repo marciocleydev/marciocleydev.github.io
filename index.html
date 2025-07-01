@@ -6,7 +6,6 @@
     
     <title>Marcio Cley - Desenvolvedor Java Full Stack</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #2c3e50;
@@ -29,12 +28,76 @@
         }
 
         header {
-            background: var(--primary);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-            position: relative;
-        }
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #f72585, #4cc9f0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: fadeIn 1.5s ease;
+}
+
+header .tagline {
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: fadeIn 2s ease 0.5s forwards;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Efeito de partículas (fundo dinâmico) */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* Animação do "Hello World" */
+.hello-world {
+    position: absolute;
+    font-size: 20vw;
+    font-weight: bold;
+    opacity: 0.03;
+    z-index: 1;
+    animation: float 15s infinite linear;
+    pointer-events: none;
+    user-select: none;
+    color: #4cc9f0;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+    25% { transform: translate(-40%, -60%) rotate(5deg); }
+    50% { transform: translate(-60%, -40%) rotate(-5deg); }
+    75% { transform: translate(-40%, -50%) rotate(5deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
         header::after {
             content: '';
@@ -45,7 +108,7 @@
             height: 100px;
             background: var(--primary);
             clip-path: polygon(0 0, 100% 0, 50% 100%);
-            z-index: -1;
+            z-index: 2;
         }
 
         header img {
@@ -456,11 +519,20 @@
     </style>
 </head>
 <body>
-    <header>
+   <header>
+    <!-- Efeito de partículas -->
+    <div id="particles-js"></div>
+    
+    <!-- "Hello World" flutuante -->
+    <div class="hello-world" style="top: 30%; left: 30%;">Hello</div>
+    <div class="hello-world" style="top: 70%; left: 70%;">World</div>
+    
+    <div class="hero-content">
         <img src="foto-perfil.jpg" alt="Foto de Marcio Cley">  
         <h1>Marcio Cley Soares Araujo</h1>
         <p class="tagline">"Transformando desafios em soluções através do código"</p>
-    </header>
+    </div>
+</header>
 
     <nav>
         <ul>
@@ -640,5 +712,45 @@
         </div>
         <p>© 2024 Marcio Cley Soares Araujo. Todos os direitos reservados.</p>
     </footer>
+    <!-- Scripts para efeitos -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    // Inicializa partículas
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#4cc9f0" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.5, "random": true },
+            "size": { "value": 3, "random": true },
+            "line_linked": { "enable": true, "distance": 150, "color": "#4cc9f0", "opacity": 0.4, "width": 1 },
+            "move": { "enable": true, "speed": 3, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": { "enable": true, "mode": "repulse" },
+                "onclick": { "enable": true, "mode": "push" }
+            }
+        }
+    });
+
+    // Efeito de digitação opcional para o slogan
+    const tagline = document.querySelector('.tagline');
+    if (tagline) {
+        const text = tagline.textContent;
+        tagline.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                tagline.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        setTimeout(typeWriter, 1500);
+    }
+</script>
 </body>
 </html>
