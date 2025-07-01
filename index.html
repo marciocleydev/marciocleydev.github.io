@@ -6,6 +6,7 @@
     
     <title>Marcio Cley - Desenvolvedor Java Full Stack</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #2c3e50;
@@ -146,6 +147,76 @@
             color: white;
             transform: scale(1.05);
         }
+        /* Estilos para a seção de idiomas */
+#idiomas {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+.language-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.language-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.language-item:last-child {
+    border-bottom: none;
+}
+
+.language-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.flag-icon {
+    font-size: 1.5rem;
+}
+
+.language-name {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.language-level {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.level-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #e0e0e0;
+}
+
+.level-dot.active {
+    background: #3498db;
+}
+
+.level-text {
+    margin-left: 10px;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+/* Ícone no título */
+#idiomas h2 i {
+    margin-right: 10px;
+    color: #3498db;
+}
 
         .projects-container {
             display: grid;
@@ -425,20 +496,55 @@
                 <div class="skill-card">Scrum</div>
             </div>
         </section>
-        <section id="idiomas">
-    <h2>🌐 Idiomas</h2>
+      <section id="idiomas">
+    <h2><i class="fas fa-language"></i> Idiomas</h2>
     <div class="language-container">
-        <div class="language">
-            <span>Português</span>
-            <div class="progress-bar" style="width: 100%"></div>
+        <!-- Português -->
+        <div class="language-item">
+            <div class="language-info">
+                <span class="flag-icon">🇧🇷</span>
+                <span class="language-name">Português</span>
+            </div>
+            <div class="language-level">
+                <span class="level-dot active"></span>
+                <span class="level-dot active"></span>
+                <span class="level-dot active"></span>
+                <span class="level-dot active"></span>
+                <span class="level-dot active"></span>
+                <span class="level-text">Nativo</span>
+            </div>
         </div>
-        <div class="language">
-            <span>Inglês</span>
-            <div class="progress-bar" style="width: 65%"></div>
+        
+        <!-- Inglês -->
+        <div class="language-item">
+            <div class="language-info">
+                <span class="flag-icon">🇺🇸</span>
+                <span class="language-name">Inglês</span>
+            </div>
+            <div class="language-level">
+                <span class="level-dot active"></span>
+                <span class="level-dot active"></span>
+                <span class="level-dot active"></span>
+                <span class="level-dot"></span>
+                <span class="level-dot"></span>
+                <span class="level-text">Intermediário</span>
+            </div>
         </div>
-        <div class="language">
-            <span>Espanhol</span>
-            <div class="progress-bar" style="width: 30%"></div>
+        
+        <!-- Espanhol -->
+        <div class="language-item">
+            <div class="language-info">
+                <span class="flag-icon">🇪🇸</span>
+                <span class="language-name">Espanhol</span>
+            </div>
+            <div class="language-level">
+                <span class="level-dot active"></span>
+                <span class="level-dot"></span>
+                <span class="level-dot"></span>
+                <span class="level-dot"></span>
+                <span class="level-dot"></span>
+                <span class="level-text">Básico</span>
+            </div>
         </div>
     </div>
 </section>
