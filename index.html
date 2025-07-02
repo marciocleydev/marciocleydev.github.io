@@ -38,11 +38,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 4;
     padding: 2rem;
 }
 
@@ -71,7 +72,8 @@ header .tagline {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 3;
+    pointer-events: all;
 }
 
 /* Animação do "Hello World" */
@@ -128,7 +130,7 @@ header .tagline {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.7) 100%);
-    z-index: 1;
+    z-index: 2;
 }
 
 .profile-image-container {
@@ -575,6 +577,17 @@ section:hover h2::after {
 .right .timeline-content::before {
     left: -10px;
 }
+.left {
+    left: 0;
+    padding-right: 60px;
+    text-align: right;
+}
+
+.right {
+    left: 50%;
+    padding-left: 60px;
+    text-align: left;
+}
         aside {
             background: white;
             padding: 2rem;
@@ -691,6 +704,7 @@ footer p {
     font-size: 0.9rem;
     opacity: 0.8;
 }
+        
 
         @media (max-width: 768px) {
     /* Estilos para o menu de navegação */
@@ -948,7 +962,7 @@ footer p {
             </div>
         </section>
 
-        <aside id="contato">
+        <section id="contato">
             <h2>Contato</h2>
             <p>Estou aberto a oportunidades na área de desenvolvimento. Entre em contato para conversarmos!</p>
             
@@ -963,7 +977,7 @@ footer p {
         <i class="fas fa-envelope"></i>
     </a>
 </div>
-        </aside>
+        </section>
     </main>
 
     <footer>
