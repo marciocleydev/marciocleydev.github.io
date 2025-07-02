@@ -1,812 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <!-- Metadados básicos -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- Título da página -->
     <title>Marcio Cley - Desenvolvedor Java Full Stack</title>
+    
+    <!-- Links para arquivos externos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --light: #ecf0f1;
-            --dark: #1a252f;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            line-height: 1.6;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-
-        header {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    color: white;
-    padding: 4rem 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    z-index: 1;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 4;
-    padding: 2rem;
-}
-
-header h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(to right, #f72585, #4cc9f0);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: fadeIn 1.5s ease;
-}
-
-header .tagline {
-    font-size: 1.5rem;
-    opacity: 0;
-    animation: fadeIn 2s ease 0.5s forwards;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* Efeito de partículas (fundo dinâmico) */
-#particles-js {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 3;
-    pointer-events: all;
-}
-
-/* Animação do "Hello World" */
-.hello-world {
-    position: absolute;
-    font-size: 15vw;
-    font-weight: bold;
-    opacity: 0.05;
-    z-index: 1;
-    animation: float 15s infinite linear;
-    pointer-events: none;
-    user-select: none;
-    color: #4cc9f0;
-}
-
-@keyframes float {
-    0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
-    25% { transform: translate(-40%, -60%) rotate(5deg); }
-    50% { transform: translate(-60%, -40%) rotate(-5deg); }
-    75% { transform: translate(-40%, -50%) rotate(5deg); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-        header::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 40px;
-    background: linear-gradient(to bottom, transparent 0%, var(--primary) 70%);
-    z-index: 5;
-}
-
-        header img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--light);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            margin-bottom: 1rem;
-        }
-
-        /* Adicionar ao CSS: */
-.header-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.7) 100%);
-    z-index: 2;
-}
-
-.profile-image-container {
-    position: relative;
-    width: 180px;
-    height: 180px;
-    margin: 0 auto 1.5rem;
-    border-radius: 50%;
-    padding: 5px;
-    background: linear-gradient(45deg, #f72585, #4cc9f0);
-    overflow: hidden;
-}
-
-.profile-image {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--light);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-}
-
-
-.title-gradient {
-    background: linear-gradient(45deg, #f72585, #4cc9f0, #7209b7, #3a0ca3);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: gradient-shift 8s ease infinite;
-}
-
-@keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.mouse {
-    width: 25px;
-    height: 40px;
-    border: 2px solid rgba(255,255,255,0.7);
-    border-radius: 15px;
-    position: relative;
-}
-
-.mouse::before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 8px;
-    background: rgba(255,255,255,0.7);
-    border-radius: 2px;
-    animation: scroll-animation 2s infinite;
-}
-
-@keyframes scroll-animation {
-    0% { top: 5px; opacity: 1; }
-    100% { top: 20px; opacity: 0; }
-}
-        .scroll-indicator {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    animation: bounce 2s infinite;
-}
-
-.scroll-indicator i {
-    font-size: 2rem;
-    color: rgba(255,255,255,0.7);
-    transition: all 0.3s;
-}
-
-.scroll-indicator:hover i {
-    color: var(--secondary);
-    transform: scale(1.2);
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-    40% { transform: translateY(-20px) translateX(-50%); }
-    60% { transform: translateY(-10px) translateX(-50%); }
-}
-
-        .tagline {
-            font-style: italic;
-            margin: 1rem auto;
-            max-width: 600px;
-        }
-
-        nav {
-            background: var(--dark);
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-
-        nav ul li {
-            margin: 0 1.5rem;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 0.5rem;
-            transition: all 0.3s;
-            border-bottom: 2px solid transparent;
-        }
-
-        nav ul li a:hover {
-            color: var(--secondary);
-            border-bottom: 2px solid var(--secondary);
-        }
-    
-nav ul li a.active {
-    color: var(--secondary);
-    border-bottom: 2px solid var(--secondary);
-    font-weight: 700;
-}
-
-        main {
-            padding: 2rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-       section {
-    margin-bottom: 3rem;
-    padding: 2.5rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
-}
-
-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(to bottom, #f72585, #4cc9f0);
-    transition: all 0.4s ease;
-}
-
-section:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-}
-
-section:hover::before {
-    width: 6px;
-}
-
-h2 {
-    color: var(--primary);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    position: relative;
-    display: inline-block;
-}
-
-h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50%;
-    height: 3px;
-    background: linear-gradient(to right, var(--secondary), #f72585);
-    transition: width 0.4s ease;
-}
-
-section:hover h2::after {
-    width: 100%;
-}
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .skill-card {
-            background: var(--light);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 600;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-
-        .skill-card:hover {
-            background: var(--secondary);
-            color: white;
-            transform: scale(1.05);
-        }
-        /* Estilos para a seção de idiomas */
-#idiomas {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    margin-bottom: 2rem;
-}
-
-.language-container {
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.language-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.language-item:last-child {
-    border-bottom: none;
-}
-
-.language-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.flag-icon {
-    font-size: 1.5rem;
-}
-
-.language-name {
-    font-weight: 600;
-    color: #2c3e50;
-}
-
-.language-level {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.level-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #e0e0e0;
-}
-
-.level-dot.active {
-    background: #3498db;
-}
-
-.level-text {
-    margin-left: 10px;
-    font-size: 0.9rem;
-    color: #7f8c8d;
-    font-weight: 500;
-}
-
-/* Ícone no título */
-#idiomas h2 i {
-    margin-right: 10px;
-    color: #3498db;
-}
-
-        .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        /* Substituir o .project-card por: */
-.project-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: none;
-    position: relative;
-}
-
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(to right, #f72585, #4cc9f0);
-}
-
-.project-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-}
-
-.project-content {
-    padding: 2rem;
-    position: relative;
-}
-
-.project-content h3 {
-    color: var(--primary);
-    margin-bottom: 1rem;
-    font-size: 1.4rem;
-    position: relative;
-    display: inline-block;
-}
-
-.project-content h3::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 40px;
-    height: 3px;
-    background: var(--secondary);
-    transition: width 0.3s ease;
-}
-
-.project-card:hover .project-content h3::after {
-    width: 80px;
-}
-
-.tech-tag {
-    background: var(--light);
-    color: var(--primary);
-    padding: 0.4rem 1rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0,0,0,0.05);
-}
-
-.tech-tag:hover {
-    background: var(--secondary);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-        /* Substituir a timeline por: */
-.timeline {
-    position: relative;
-    max-width: 800px;
-    margin: 3rem auto;
-    padding: 0 20px;
-}
-
-.timeline::after {
-    content: '';
-    position: absolute;
-    width: 4px;
-    background: linear-gradient(to bottom, var(--secondary), #f72585);
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -2px;
-    border-radius: 10px;
-}
-
-.timeline-item {
-    padding: 15px 40px;
-    position: relative;
-    width: 50%;
-    box-sizing: border-box;
-    perspective: 1000px;
-}
-
-.timeline-item::after {
-    content: '';
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    background-color: white;
-    border: 4px solid var(--secondary);
-    border-radius: 50%;
-    top: 20px;
-    z-index: 1;
-    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
-    transition: all 0.4s ease;
-}
-
-.timeline-item:hover::after {
-    transform: scale(1.2);
-    box-shadow: 0 0 0 8px rgba(52, 152, 219, 0.2);
-}
-
-.timeline-content {
-    text-align: left;
-    padding: 25px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-    transition: all 0.4s ease;
-    position: relative;
-}
-
-.timeline-content::before {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: white;
-    top: 20px;
-    transform: rotate(45deg);
-    z-index: -1;
-}
-
-.timeline-item:hover .timeline-content {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-}
-
-.left .timeline-content::before {
-    right: -10px;
-}
-
-.right .timeline-content::before {
-    left: -10px;
-}
-.left {
-    left: 0;
-    padding-right: 60px;
-    text-align: left;
-}
-
-.right {
-    left: 50%;
-    padding-left: 60px;
-    text-align: left;
-}
-        aside {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            margin-bottom: 3rem;
-        }
-
-    .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--primary);
-    color: white;
-    font-size: 1.5rem;
-    transition: all 0.3s ease;
-}
-
-.social-link:hover {
-    background: var(--secondary);
-    transform: scale(1.1);
-}
-
-.social-link i {
-    transition: all 0.3s ease;
-}
-
-      /* Substituir o footer por: */
-footer {
-    background: linear-gradient(135deg, var(--dark), #16213e);
-    color: white;
-    text-align: center;
-    padding: 3rem 2rem;
-    margin-top: 5rem;
-    position: relative;
-}
-
-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(to right, #f72585, #4cc9f0);
-}
-
-.contact-info {
-    margin: 1.5rem 0;
-}
-
-.contact-info a {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    position: relative;
-    padding-bottom: 2px;
-}
-
-.contact-info a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--secondary);
-    transition: width 0.3s ease;
-}
-
-.contact-info a:hover {
-    color: var(--secondary);
-}
-
-.contact-info a:hover::after {
-    width: 100%;
-}
-        #contato h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50%;
-    height: 3px;
-    background: linear-gradient(to right, var(--secondary), #f72585);
-    transition: width 0.4s ease;
-}
-
-#contato:hover h2::after {
-    width: 100%;
-}
-
-        #contato {
-    transition: all 0.3s ease;
-}
-
-#contato:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-footer p {
-    margin: 0.5rem 0;
-    font-size: 0.9rem;
-    opacity: 0.8;
-}
-        
-
-        @media (max-width: 768px) {
-    /* Estilos para o menu de navegação */
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-    
-    /* Estilos para o header */
-    header {
-        min-height: 70vh;
-        padding: 3rem 1rem;
-    }
-    
-    /* Estilos para o hello-world */
-    .hello-world {
-        font-size: 12vw;
-    }
-    
-    /* Estilos para o scroll indicator */
-    .scroll-indicator i {
-        font-size: 1.5rem;
-    }
-    
-    /* Estilos para o título */
-    header h1 {
-        font-size: 2.2rem;
-    }
-    
-    /* Estilos para o tagline */
-    .tagline {
-        font-size: 1.2rem;
-    }
-    
-    /* Estilos para os itens da timeline */
-    .timeline-item {
-        width: 100%;
-        padding-left: 70px;
-        padding-right: 25px;
-    }
-    
-    .timeline-item.left, 
-    .timeline-item.right {
-        left: 0;
-    }
-    
-    .timeline-item::after {
-        left: 21px;
-    }
-    
-    /* Estilos para a linha da timeline */
-    .timeline::after {
-        left: 31px;
-    }
-    
-    /* Remover margens dos itens do menu */
-    nav ul li {
-        margin: 0;
-    }
-nav ul li:nth-child(3) a { 
-    color: var(--secondary);
-    border-bottom: 2px solid var(--secondary);
-}
-    
-    /* Ajustar posição dos marcadores da timeline */
-    .left::after, 
-    .right::after {
-        left: 21px;
-    }
-    
-    /* Resetar posição dos itens à direita */
-    .right {
-        left: 0%;
-    }
-}
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-   <header>
-    <div id="particles-js"></div>
-    
-    
-    <div class="header-overlay"></div>
+    <!-- Cabeçalho com efeitos visuais -->
+    <header>
+        <!-- Efeito de partículas no background -->
+        <div id="particles-js"></div>
+        
+        <!-- Overlay para melhor contraste -->
+        <div class="header-overlay"></div>
 
-    <div class="hello-world" style="top: 30%; left: 30%;">Hello</div>
-    <div class="hello-world" style="top: 70%; left: 70%;">World</div>
-    
-    <div class="hero-content">
-        <div class="profile-image-container">
-            <img src="foto-perfil.jpg" alt="Foto de Marcio Cley" class="profile-image">  
+        <!-- Elementos decorativos "Hello World" -->
+        <div class="hello-world" style="top: 30%; left: 30%;">Hello</div>
+        <div class="hello-world" style="top: 70%; left: 70%;">World</div>
+        
+        <!-- Conteúdo principal do cabeçalho -->
+        <div class="hero-content">
+            <!-- Container da foto de perfil -->
+            <div class="profile-image-container">
+                <img src="foto-perfil.jpg" alt="Foto de Marcio Cley" class="profile-image">  
+            </div>
+            <!-- Título com efeito de gradiente -->
+            <h1 class="title-gradient">Marcio Cley Soares Araujo</h1>
+            <!-- Slogan com efeito de digitação -->
+            <p class="tagline typed-text">"Transformando desafios em soluções através do código"</p>
         </div>
-        <h1 class="title-gradient">Marcio Cley Soares Araujo</h1>
-        <p class="tagline typed-text">"Transformando desafios em soluções através do código"</p>
-    </div>
-    
-    <div class="scroll-indicator">
-        <div class="mouse"></div>
-    </div>
-</header>
+        
+        <!-- Indicador de scroll -->
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+        </div>
+    </header>
 
+    <!-- Navegação principal -->
     <nav>
         <ul>
             <li><a href="#sobre">Sobre Mim</a></li>
@@ -818,7 +55,9 @@ nav ul li:nth-child(3) a {
         </ul>
     </nav>
 
+    <!-- Conteúdo principal -->
     <main>
+        <!-- Seção Sobre Mim -->
         <section id="sobre">
             <h2>Sobre Mim</h2>
             <p>Estudante do último semestre de Análise e Desenvolvimento de Sistemas (ADS) com sólida base em Java, HTML, CSS, JavaScript e MySQL. Apaixonado por tecnologia, programação e aprendizado contínuo, com inglês intermediário e em evolução.</p>
@@ -827,6 +66,7 @@ nav ul li:nth-child(3) a {
             <p>Sou dedicado, pontual, aprendo rápido e busco oportunidades para aplicar meus conhecimentos técnicos e interpessoais, contribuindo para soluções inovadoras e eficientes.</p>
         </section>
 
+        <!-- Seção Habilidades Técnicas -->
         <section id="habilidades">
             <h2>Habilidades Técnicas</h2>
             <div class="skills-grid">
@@ -842,62 +82,66 @@ nav ul li:nth-child(3) a {
                 <div class="skill-card">Scrum</div>
             </div>
         </section>
-      <section id="idiomas">
-    <h2><i class="fas fa-language"></i> Idiomas</h2>
-    <div class="language-container">
-        <!-- Português -->
-        <div class="language-item">
-            <div class="language-info">
-                <span class="flag-icon">🇧🇷</span>
-                <span class="language-name">Português</span>
-            </div>
-            <div class="language-level">
-                <span class="level-dot active"></span>
-                <span class="level-dot active"></span>
-                <span class="level-dot active"></span>
-                <span class="level-dot active"></span>
-                <span class="level-dot active"></span>
-                <span class="level-text">Nativo</span>
-            </div>
-        </div>
-        
-        <!-- Inglês -->
-        <div class="language-item">
-            <div class="language-info">
-                <span class="flag-icon">🇺🇸</span>
-                <span class="language-name">Inglês</span>
-            </div>
-            <div class="language-level">
-                <span class="level-dot active"></span>
-                <span class="level-dot active"></span>
-                <span class="level-dot active"></span>
-                <span class="level-dot"></span>
-                <span class="level-dot"></span>
-                <span class="level-text">Intermediário</span>
-            </div>
-        </div>
-        
-        <!-- Espanhol -->
-        <div class="language-item">
-            <div class="language-info">
-                <span class="flag-icon">🇪🇸</span>
-                <span class="language-name">Espanhol</span>
-            </div>
-            <div class="language-level">
-                <span class="level-dot active"></span>
-                <span class="level-dot active"></span>
-                <span class="level-dot"></span>
-                <span class="level-dot"></span>
-                <span class="level-dot"></span>
-                <span class="level-text">Básico</span>
-            </div>
-        </div>
-    </div>
-</section>
 
+        <!-- Seção Idiomas -->
+        <section id="idiomas">
+            <h2><i class="fas fa-language"></i> Idiomas</h2>
+            <div class="language-container">
+                <!-- Português -->
+                <div class="language-item">
+                    <div class="language-info">
+                        <span class="flag-icon">🇧🇷</span>
+                        <span class="language-name">Português</span>
+                    </div>
+                    <div class="language-level">
+                        <span class="level-dot active"></span>
+                        <span class="level-dot active"></span>
+                        <span class="level-dot active"></span>
+                        <span class="level-dot active"></span>
+                        <span class="level-dot active"></span>
+                        <span class="level-text">Nativo</span>
+                    </div>
+                </div>
+                
+                <!-- Inglês -->
+                <div class="language-item">
+                    <div class="language-info">
+                        <span class="flag-icon">🇺🇸</span>
+                        <span class="language-name">Inglês</span>
+                    </div>
+                    <div class="language-level">
+                        <span class="level-dot active"></span>
+                        <span class="level-dot active"></span>
+                        <span class="level-dot active"></span>
+                        <span class="level-dot"></span>
+                        <span class="level-dot"></span>
+                        <span class="level-text">Intermediário</span>
+                    </div>
+                </div>
+                
+                <!-- Espanhol -->
+                <div class="language-item">
+                    <div class="language-info">
+                        <span class="flag-icon">🇪🇸</span>
+                        <span class="language-name">Espanhol</span>
+                    </div>
+                    <div class="language-level">
+                        <span class="level-dot active"></span>
+                        <span class="level-dot active"></span>
+                        <span class="level-dot"></span>
+                        <span class="level-dot"></span>
+                        <span class="level-dot"></span>
+                        <span class="level-text">Básico</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Experiência Profissional -->
         <section id="experiencia">
             <h2>Experiência Profissional</h2>
             <div class="timeline">
+                <!-- Item 1 da timeline -->
                 <div class="timeline-item left">
                     <div class="timeline-content">
                         <h3>Operador e Líder de Máquina</h3>
@@ -911,6 +155,8 @@ nav ul li:nth-child(3) a {
                         </ul>
                     </div>
                 </div>
+                
+                <!-- Item 2 da timeline -->
                 <div class="timeline-item right">
                     <div class="timeline-content">
                         <h3>Bombeiro Voluntário</h3>
@@ -924,6 +170,8 @@ nav ul li:nth-child(3) a {
                         </ul>
                     </div>
                 </div>
+                
+                <!-- Item 3 da timeline -->
                 <div class="timeline-item left">
                     <div class="timeline-content">
                         <h3>Estudante de ADS</h3>
@@ -940,9 +188,11 @@ nav ul li:nth-child(3) a {
             </div>
         </section>
 
+        <!-- Seção Projetos -->
         <section id="projetos">
             <h2>Projetos Recentes</h2>
             <div class="projects-container">
+                <!-- Projeto 1 -->
                 <article class="project-card">
                     <div class="project-content">
                         <h3>Sistema de Gestão</h3>
@@ -954,6 +204,8 @@ nav ul li:nth-child(3) a {
                         </div>
                     </div>
                 </article>
+                
+                <!-- Projeto 2 -->
                 <article class="project-card">
                     <div class="project-content">
                         <h3>Portfólio Online</h3>
@@ -968,109 +220,36 @@ nav ul li:nth-child(3) a {
             </div>
         </section>
 
+        <!-- Seção Contato -->
         <section id="contato">
             <h2>Contato</h2>
             <p>Estou aberto a oportunidades na área de desenvolvimento. Entre em contato para conversarmos!</p>
             
+            <!-- Links para redes sociais -->
             <div class="social-links">
-    <a href="https://github.com/marciocleydev" class="social-link" aria-label="GitHub" target="_blank">
-        <i class="fab fa-github"></i>
-    </a>
-    <a href="https://www.linkedin.com/in/marciocleydev" class="social-link" aria-label="LinkedIn" target="_blank">
-        <i class="fab fa-linkedin-in"></i>
-    </a>
-    <a href="mailto:marciocleydev@gmail.com" class="social-link" aria-label="Email">
-        <i class="fas fa-envelope"></i>
-    </a>
-</div>
+                <a href="https://github.com/marciocleydev" class="social-link" aria-label="GitHub" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/marciocleydev" class="social-link" aria-label="LinkedIn" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="mailto:marciocleydev@gmail.com" class="social-link" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
         </section>
     </main>
 
+    <!-- Rodapé -->
     <footer>
         <div class="contact-info">
             <p>Email: <a href="mailto:marciocleydev@gmail.com">marciocleydev@gmail.com</a></p>
         </div>
         <p>© 2025 Marcio Cley Soares Araujo. Todos os direitos reservados.</p>
     </footer>
-    <!-- Scripts para efeitos -->
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script>
-    // Inicializa partículas
-    particlesJS("particles-js", {
-        "particles": {
-            "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-            "color": { "value": "#4cc9f0" },
-            "shape": { "type": "circle" },
-            "opacity": { "value": 0.5, "random": true },
-            "size": { "value": 3, "random": true },
-            "line_linked": { "enable": true, "distance": 150, "color": "#4cc9f0", "opacity": 0.4, "width": 1 },
-            "move": { "enable": true, "speed": 3, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
-        },
-        "interactivity": {
-            "detect_on": "canvas",
-            "events": {
-                "onhover": { "enable": true, "mode": "repulse" },
-                "onclick": { "enable": true, "mode": "push" }
-            }
-        }
-    });
 
-    // Efeito de digitação opcional para o slogan
-    const tagline = document.querySelector('.tagline');
-    if (tagline) {
-        const text = tagline.textContent;
-        tagline.textContent = '';
-        
-        let i = 0;
-        function typeWriter() {
-            if (i < text.length) {
-                tagline.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
-            }
-        }
-        setTimeout(typeWriter, 1500);
-    }
-
-     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-// Adicionar classe ativa ao item do menu conforme scroll
-    window.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY + 150;
-
-        
-        document.querySelectorAll('section').forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                document.querySelectorAll('nav ul li a').forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    });
-    // Disparar evento scroll ao carregar a página
-window.addEventListener('load', () => {
-    window.dispatchEvent(new Event('scroll'));
-});
-</script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
