@@ -102,13 +102,16 @@ header {
     position: absolute;
     font-size: 15vw;
     font-weight: bold;
-    opacity: 0.05;
+    opacity: 0.13;
     z-index: 1;
-    animation: float 15s infinite linear;
+    animation: float 13s infinite linear;
     pointer-events: none;
     user-select: none;
     color: #4cc9f0;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    
 }
+
 
 /* Conteúdo principal do header */
 .hero-content {
