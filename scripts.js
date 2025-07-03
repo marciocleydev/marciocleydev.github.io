@@ -97,13 +97,20 @@ const setupSmoothScroll = () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            
+
+            // Remove todas as classes 'active'
+            document.querySelectorAll('nav ul li a').forEach(link => link.classList.remove('active'));
+
+            // Adiciona a classe apenas no link clicado
+            this.classList.add('active');
+
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
+                const navHeight = document.querySelector('nav')?.offsetHeight || 80;
                 window.scrollTo({
-                    top: targetElement.offsetTop - 80, // Ajusta para o header fixo
+                    top: targetElement.offsetTop - navHeight,
                     behavior: 'smooth'
                 });
             }
@@ -120,24 +127,27 @@ const setupSmoothScroll = () => {
  */
 const setupActiveMenu = () => {
     window.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY + 150;
-        
+        let currentSectionId = '';
+        let minDistance = window.innerHeight;
+
         document.querySelectorAll('section').forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                document.querySelectorAll('nav ul li a').forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
+            const rect = section.getBoundingClientRect();
+            if (rect.top >= 0 && rect.top < minDistance) {
+                minDistance = rect.top;
+                currentSectionId = section.getAttribute('id');
+            }
+        });
+
+        // Remove todas as classes antes de adicionar uma nova
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSectionId}`) {
+                link.classList.add('active');
             }
         });
     });
 };
+
 
 /* =============================================
    INICIALIZAÇÃO GERAL
@@ -159,3 +169,4 @@ const init = () => {
 
 // Inicia tudo quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', init);
+
