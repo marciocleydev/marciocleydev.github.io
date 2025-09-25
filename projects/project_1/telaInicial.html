@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGEC - Sistema de Gerenciamento de Biblioteca</title>
+    <style>
+        /* RESET */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        
+        /* BARRA DO NAVEGADOR (IGUAL À IMAGEM) */
+        .browser-bar {
+            background: #f1f1f1;
+            padding: 8px 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #d6d6d6;
+            border-bottom: none;
+        }
+        .browser-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        .browser-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .browser-btn.red { background: #ff5f56; }
+        .browser-btn.yellow { background: #ffbd2e; }
+        .browser-btn.green { background: #27c93f; }
+        .browser-url {
+            flex: 1;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            border: 1px solid #d6d6d6;
+            color: #555;
+            font-size: 12px;
+        }
+        
+        /* CONTAINER PRINCIPAL */
+        .browser-container {
+            width: 900px;
+            margin: 20px auto;
+            border: 1px solid #0066cc;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* CABEÇALHO */
+        .header {
+            background: #0066cc;
+            color: white;
+            padding: 10px 15px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        /* FORMULÁRIO */
+        .form-container {
+            padding: 15px;
+            background: #f9f9f9;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            font-size: 13px;
+        }
+        .form-group input:focus {
+            border-color: #0066cc;
+            outline: none;
+        }
+        .form-group-full {
+            grid-column: span 2;
+        }
+        
+        /* TABELA */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border: 1px solid #ddd;
+        }
+        .data-table th {
+            background: #e6e6e6;
+            padding: 10px;
+            text-align: left;
+            font-size: 13px;
+            color: #333;
+            border-bottom: 2px solid #ddd;
+        }
+        .data-table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+        .data-table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        /* BOTÕES */
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .btn {
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .btn-blue {
+            background: #0066cc;
+            color: white;
+        }
+        .btn-gray {
+            background: #e6e6e6;
+            color: #333;
+        }
+        
+        /* MENU PRINCIPAL */
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px;
+        }
+        .menu-item {
+            background: #e6e6e6;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .menu-item:hover {
+            background: #d6d6d6;
+        }
+        
+        /* SUBTÍTULOS */
+        .subtitle {
+            font-size: 14px;
+            font-weight: bold;
+            color: #0066cc;
+            margin: 15px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        /* OCULTAR TELAS */
+        .screen {
+            display: none;
+        }
+        .screen.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- TELA: MENU PRINCIPAL -->
+    <div class="browser-container screen active" id="menu-principal">
+        <div class="browser-bar">
+            <div class="browser-buttons">
+                <div class="browser-btn red"></div>
+                <div class="browser-btn yellow"></div>
+                <div class="browser-btn green"></div>
+            </div>
+            <div class="browser-url">http://biblioteca.local/menu-principal</div>
+        </div>
+        
+        <div class="header">SISTEMA DE GERENCIAMENTO DE BIBLIOTECA > MENU PRINCIPAL</div>
+        
+        <div class="form-container">
+            <div class="menu-container">
+                <div class="menu-item" onclick="showScreen('cadastro-autores')">Cadastro de Autores</div>
+                <div class="menu-item" onclick="showScreen('cadastro-editoras')">Cadastro de Editoras</div>
+                <div class="menu-item" onclick="showScreen('cadastro-livros')">Cadastro de Livros</div>
+                <div class="menu-item" onclick="showScreen('cadastro-alunos')">Cadastro de Alunos</div>
+                <div class="menu-item" onclick="showScreen('emprestimos')">Empréstimos</div>
+                <div class="menu-item" onclick="showScreen('devolucoes')">Devoluções</div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-gray">Configurações</button>
+                <button class="btn btn-gray">Sair</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TELA: CADASTRO DE AUTORES -->
+    <div class="browser-container screen" id="cadastro-autores">
+        <div class="browser-bar">
+            <div class="browser-buttons">
+                <div class="browser-btn red"></div>
+                <div class="browser-btn yellow"></div>
+                <div class="browser-btn green"></div>
+            </div>
+            <div class="browser-url">http://biblioteca.local/cadastro-autores</div>
+        </div>
+        
+        <div class="header">MENU PRINCIPAL > CADASTRO DE AUTORES</div>
+        
+        <div class="form-container">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="id-autor">ID do Autor:</label>
+                    <input type="text" id="id-autor" value="3" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="nome-autor">Nome do Autor:</label>
+                    <input type="text" id="nome-autor" placeholder="Digite o nome do autor">
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome do Autor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Machado de Assis</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Clarice Lispector</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="action-buttons">
+                <button class="btn btn-gray">NOVO</button>
+                <button class="btn btn-gray">EDITAR</button>
+                <button class="btn btn-blue">GRAVAR</button>
+                <button class="btn btn-gray">EXCLUIR</button>
+                <button class="btn btn-gray" onclick="showScreen('menu-principal')">SAIR</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TELA: CADASTRO DE EDITORAS -->
+    <div class="browser-container screen" id="cadastro-editoras">
+        <div class="browser-bar">
+            <div class="browser-buttons">
+                <div class="browser-btn red"></div>
+                <div class="browser-btn yellow"></div>
+                <div class="browser-btn green"></div>
+            </div>
+            <div class="browser-url">http://biblioteca.local/cadastro-editoras</div>
+        </div>
+        
+        <div class="header">MENU PRINCIPAL > CADASTRO DE EDITORAS</div>
+        
+        <div class="form-container">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="id-editora">ID da Editora:</label>
+                    <input type="text" id="id-editora" value="2" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="nome-editora">Nome da Editora:</label>
+                    <input type="text" id="nome-editora" placeholder="Digite o nome da editora">
+                </div>
+                <div class="form-group">
+                    <label for="uf-editora">UF:</label>
+                    <select id="uf-editora">
+                        <option value="">Selecione</option>
+                        <option value="SP">SP</option>
+                        <option value="RJ">RJ</option>
+                        <option value="SC">SC</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cidade-editora">Cidade:</label>
+                    <select id="cidade-editora">
+                        <option value="">Selecione</option>
+                        <option value="1">São Paulo</option>
+                        <option value="2">Rio de Janeiro</option>
+                        <option value="3">Florianópolis</option>
+                    </select>
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>UF</th>
+                        <th>Cidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Companhia das Letras</td>
+                        <td>SP</td>
+                        <td>São Paulo</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="action-buttons">
+                <button class="btn btn-gray">NOVO</button>
+                <button class="btn btn-gray">EDITAR</button>
+                <button class="btn btn-blue">GRAVAR</button>
+                <button class="btn btn-gray">EXCLUIR</button>
+                <button class="btn btn-gray" onclick="showScreen('menu-principal')">SAIR</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TELA: CADASTRO DE LIVROS -->
+    <div class="browser-container screen" id="cadastro-livros">
+        <div class="browser-bar">
+            <div class="browser-buttons">
+                <div class="browser-btn red"></div>
+                <div class="browser-btn yellow"></div>
+                <div class="browser-btn green"></div>
+            </div>
+            <div class="browser-url">http://biblioteca.local/cadastro-livros</div>
+        </div>
+        
+        <div class="header">MENU PRINCIPAL > CADASTRO DE LIVROS</div>
+        
+        <div class="form-container">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="id-livro">ID do Livro:</label>
+                    <input type="text" id="id-livro" value="5" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="titulo-livro">Título do Livro:</label>
+                    <input type="text" id="titulo-livro" placeholder="Digite o título do livro">
+                </div>
+                <div class="form-group">
+                    <label for="autor-livro">Autor:</label>
+                    <select id="autor-livro">
+                        <option value="">Selecione</option>
+                        <option value="1">Machado de Assis</option>
+                        <option value="2">Clarice Lispector</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editora-livro">Editora:</label>
+                    <select id="editora-livro">
+                        <option value="">Selecione</option>
+                        <option value="1">Companhia das Letras</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="isbn-livro">ISBN:</label>
+                    <input type="text" id="isbn-livro" placeholder="000-00-0000-000-0">
+                </div>
+                <div class="form-group">
+                    <label for="ano-livro">Ano de Publicação:</label>
+                    <input type="number" id="ano-livro" min="1900" max="2023">
+                </div>
+                <div class="form-group">
+                    <label for="quantidade-livro">Quantidade Disponível:</label>
+                    <input type="number" id="quantidade-livro" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="categoria-livro">Categoria:</label>
+                    <select id="categoria-livro">
+                        <option value="">Selecione</option>
+                        <option value="romance">Romance</option>
+                        <option value="tecnico">Técnico</option>
+                        <option value="didatico">Didático</option>
+                        <option value="ficcao">Ficção</option>
+                    </select>
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Editora</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Dom Casmurro</td>
+                        <td>Machado de Assis</td>
+                        <td>Companhia das Letras</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>A Hora da Estrela</td>
+                        <td>Clarice Lispector</td>
+                        <td>Companhia das Letras</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="action-buttons">
+                <button class="btn btn-gray">NOVO</button>
+                <button class="btn btn-gray">EDITAR</button>
+                <button class="btn btn-blue">GRAVAR</button>
+                <button class="btn btn-gray">EXCLUIR</button>
+                <button class="btn btn-gray" onclick="showScreen('menu-principal')">SAIR</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TELA: CADASTRO DE ALUNOS -->
+    <div class="browser-container screen" id="cadastro-alunos">
+        <div class="browser-bar">
+            <div class="browser-buttons">
+                <div class="browser-btn red"></div>
+                <div class="browser-btn yellow"></div>
+                <div class="browser-btn green"></div>
+            </div>
+            <div class="browser-url">http://biblioteca.local/cadastro-alunos</div>
+        </div>
+        
+        <div class="header">MENU PRINCIPAL > CADASTRO DE ALUNOS</div>
+        
+        <div class="form-container">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="id-aluno">ID do Aluno:</label>
+                    <input type="text" id="id-aluno" value="10" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="matricula-aluno">Matrícula:</label>
+                    <input type="text" id="matricula-aluno" placeholder="Número de matrícula">
+                </div>
+                <div class="form-group">
+                    <label for="nome-aluno">Nome Completo:</label>
+                    <input type="text" id="nome-aluno" placeholder="Digite o nome completo">
+                </div>
+                <div class="form-group">
+                    <label for="serie-aluno">Série/Turma:</label>
+                    <input type="text" id="serie-aluno" placeholder="Ex: 8º A">
+                </div>
+                <div class="form-group">
+                    <label for="telefone-aluno">Telefone:</label>
+                    <input type="text" id="telefone-aluno" placeholder="(00) 00000-0000">
+                </div>
+                <div class="form-group">
+                    <label for="cep-aluno">CEP:</label>
+                    <input type="text" id="cep-aluno" placeholder="00000-000">
+                </div>
+                <div class="form-group form-group-full">
+                    <label for="endereco-aluno">Endereço:</label>
+                    <input type="text" id="endereco-aluno" placeholder="Rua, Número, Bairro">
+                </div>
+                <div class="form-group">
+                    <label for="uf-aluno">UF:</label>
+                    <select id="uf-aluno">
+                        <option value="">Selecione</option>
+                        <option value="SP">SP</option>
+                        <option value="RJ">RJ</option>
+                        <option value="SC">SC</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cidade-aluno">Cidade:</label>
+                    <select id="cidade-aluno">
+                        <option value="">Selecione</option>
+                        <option value="1">São Paulo</option>
+                        <option value="2">Rio de Janeiro</option>
+                        <option value="3">Florianópolis</option>
+                    </select>
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Matrícula</th>
+                        <th>Série/Turma</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>João Silva</td>
+                        <td>2023001</td>
+                        <td>9º A</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Maria Santos</td>
+                        <td>2023002</td>
+                        <td>8º B</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="action-buttons">
+                <button class="btn btn-gray">NOVO</button>
+                <button class="btn btn-gray">EDITAR</button>
+                <button class="btn btn-blue">GRAVAR</button>
+                <button class="btn btn-gray">EXCLUIR</button>
+                <button class="btn btn-gray" onclick="showScreen('menu-principal')">SAIR</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TELA: EMPRÉSTIMOS -->
+    <div class="browser-container screen" id="emprestimos">
+        <div class="browser-bar">
+            <div class="browser-buttons">
+                <div class="browser-btn red"></div>
+                <div class="browser-btn yellow"></div>
+                <div class="browser-btn green"></div>
+            </div>
+            <div class="browser-url">http://biblioteca.local/emprestimos</div>
+        </div>
+        
+        <div class="header">MENU PRINCIPAL > EMPRÉSTIMOS</div>
+        
+        <div class="form-container">
+            <div class="subtitle">Dados do Empréstimo</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="id-emprestimo">ID do Empréstimo:</label>
+                    <input type="text" id="id-emprestimo" value="15" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="aluno-emprestimo">Aluno:</label>
+                    <select id="aluno-emprestimo">
+                        <option value="">Selecione</option>
+                        <option value="1">João Silva</option>
+                        <option value="2">Maria Santos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="data-emprestimo">Data do Empréstimo:</label>
+                    <input type="date" id="data-emprestimo">
+                </div>
+                <div class="form-group">
+                    <label for="data-devolucao">Data de Devolução:</label>
+                    <input type="date" id="data-devolucao">
+                </div>
+            </div>
+            
+            <div class="subtitle">Livros Emprestados</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="id-livro-emprestimo">ID do Livro:</label>
+                    <input type="text" id="id-livro-emprestimo">
+                </div>
+                <div class="form-group" style="display: flex; align-items: flex-end;">
+                    <button class="btn btn-blue" style="margin-right: 10px;">INCLUIR</button>
+                    <button class="btn btn-gray">EXCLUIR</button>
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID do Livro</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Dom Casmurro</td>
+                        <td>Machado de Assis</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="action-buttons">
+                <button class="btn btn-gray">NOVO</button>
+                <button class="btn btn-gray">EDITAR</button>
+                <button class="btn btn-blue">GRAVAR</button>
+                <button class="btn btn-gray">EXCLUIR</button>
+                <button class="btn btn-gray" onclick="showScreen('menu-principal')">SAIR</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TELA: DEVOLUÇÕES -->
+    <div class="browser-container screen" id="devolucoes">
+        <div class="browser-bar">
+            <div class="browser-buttons">
+                <div class="browser-btn red"></div>
+                <div class="browser-btn yellow"></div>
+                <div class="browser-btn green"></div>
+            </div>
+            <div class="browser-url">http://biblioteca.local/devolucoes</div>
+        </div>
+        
+        <div class="header">MENU PRINCIPAL > DEVOLUÇÕES</div>
+        
+        <div class="form-container">
+            <div class="subtitle">Pesquisar Empréstimo</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="pesquisa-emprestimo">ID do Empréstimo:</label>
+                    <input type="text" id="pesquisa-emprestimo">
+                </div>
+                <div class="form-group" style="display: flex; align-items: flex-end;">
+                    <button class="btn btn-blue">PESQUISAR</button>
+                </div>
+            </div>
+            
+            <div class="subtitle">Dados do Empréstimo</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="id-emprestimo-devolucao">ID do Empréstimo:</label>
+                    <input type="text" id="id-emprestimo-devolucao" value="5">
+                </div>
+                <div class="form-group">
+                    <label for="data-emprestimo-devolucao">Data do Empréstimo:</label>
+                    <input type="text" id="data-emprestimo-devolucao" value="20/09/2023">
+                </div>
+                <div class="form-group">
+                    <label for="data-prevista-devolucao">Data de Devolução:</label>
+                    <input type="text" id="data-prevista-devolucao" value="20/10/2023">
+                </div>
+                <div class="form-group">
+                    <label for="nome-aluno-devolucao">Nome do Aluno:</label>
+                    <input type="text" id="nome-aluno-devolucao" value="Maria Santos">
+                </div>
+            </div>
+            
+            <div class="subtitle">Livros Emprestados</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID do Livro</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Quantidade</th>
+                        <th>Data de Devolução</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Dom Casmurro</td>
+                        <td>Machado de Assis</td>
+                        <td>1</td>
+                        <td><input type="date" value="2023-10-20"></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="action-buttons">
+                <button class="btn btn-blue">REGISTRAR DEVOLUÇÃO</button>
+                <button class="btn btn-gray" onclick="showScreen('menu-principal')">SAIR</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para alternar entre as telas
+        function showScreen(screenId) {
+            // Oculta todas as telas
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Mostra a tela solicitada
+            document.getElementById(screenId).classList.add('active');
+        }
+        
+        // Simula a seleção de UF para atualizar as cidades
+        document.querySelectorAll('#uf-editora, #uf-aluno').forEach(select => {
+            select.addEventListener('change', function() {
+                // Em uma implementação real, isso buscaria as cidades do backend
+                console.log('UF selecionada:', this.value);
+            });
+        });
+    </script>
+</body>
+</html>
